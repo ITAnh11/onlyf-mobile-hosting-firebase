@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tải Ứng Dụng</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      padding: 40px;
+      background: #f9f9f9;
+    }
+    img {
+      width: 120px;
+      margin-bottom: 20px;
+    }
+    h1 {
+      color: #333;
+    }
+    p {
+      color: #555;
+      font-size: 16px;
+      margin: 20px 0;
+    }
+    .button {
+      display: inline-block;
+      padding: 14px 24px;
+      background: #007aff;
+      color: white;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 16px;
+    }
+    .button:hover {
+      background: #005fcc;
+    }
+  </style>
+
+</head>
+<body>
+  <img src="/icon_512.png" alt="App Icon" />
+  <h1>Chào mừng bạn đến với OnlyF</h1>
+  <p>Bạn cần cài đặt ứng dụng để tiếp tục sử dụng tính năng này.</p>
+  <a id="download-link-develop" class="button" href="">Tải Ứng Dụng Ngay (DEVELOP)</a>
+  <a id="download-link-preview" class="button" href="">Tải Ứng Dụng Ngay (PREVIEW)</a>
+  <p style="margin-top:40px; font-size: 14px; color:#999;">Hướng dẫn: tải về và cài đặt file APK, sau đó mở lại link share.</p>
+
+  <script>
+    var LINK_DOWNLOAD_APP_ANDROID= '';
+    var SCHEME_URL = '';
+
+    fetch('/constants.json')
+    .then(response => response.json())
+    .then(constants => {
+      LINK_DOWNLOAD_APP_ANDROID_DEVELOP = constants.LINK_DOWNLOAD_APP_ANDROID_DEVELOP;
+      LINK_DOWNLOAD_APP_ANDROID_PREVIEW = constants.LINK_DOWNLOAD_APP_ANDROID_PREVIEW;
+      SCHEME_URL = constants.SCHEME_URL;
+
+      // Sử dụng các biến sau khi fetch hoàn tất
+      document.getElementById('download-link-develop').href = LINK_DOWNLOAD_APP_ANDROID_DEVELOP;
+      document.getElementById('download-link-preview').href = LINK_DOWNLOAD_APP_ANDROID_PREVIEW;
+    })
+    .catch(error => {
+      console.error('Error fetching constants:', error);
+    });
+  </script>
+</body>
+</html>

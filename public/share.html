@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mở bài viết trong OnlyF</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      padding: 40px;
+      background-color: #f9f9f9;
+    }
+    h1 {
+      margin-bottom: 16px;
+    }
+    .btn {
+      display: inline-block;
+      margin: 12px;
+      padding: 14px 24px;
+      font-size: 16px;
+      background-color: #1976d2;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      text-decoration: none;
+    }
+  </style>
+
+</head>
+<body>
+  <h1>Mở bài viết trên OnlyF</h1>
+  <p>Nếu bạn đã cài ứng dụng, hãy mở bài viết trực tiếp trong app.</p>
+
+  <a id="openAppBtn" class="btn">Mở trong ứng dụng</a>
+  <br/>
+  <a href="/download.html" class="btn" style="background-color: #555;">Tải ứng dụng</a>
+
+  <script>
+  var LINK_DOWNLOAD_APP_ANDROID = '';
+  var SCHEME_URL = '';
+
+  fetch('/constants.json')
+    .then(response => response.json())
+    .then(constants => {
+      LINK_DOWNLOAD_APP_ANDROID = constants.LINK_DOWNLOAD_APP_ANDROID;
+      SCHEME_URL = constants.SCHEME_URL;
+
+      // Lấy query params
+      const urlParams = new URLSearchParams(window.location.search);
+      const postId = urlParams.get("postId");
+      const ownerId = urlParams.get("ownerId");
+
+      // Deep link URI
+      const deepLink = `${SCHEME_URL}share/post?postId=${postId}&ownerId=${ownerId}`;
+
+      // Khi bấm nút Mở ứng dụng
+      document.getElementById("openAppBtn").onclick = () => {
+        window.location.href = deepLink;
+        // Fallback sau 2s nếu không mở được app (chưa cài)
+        setTimeout(() => {
+          window.location.href = "/download.html";
+        }, 2000);
+      };
+    })
+    .catch(error => {
+      console.error('Error fetching constants:', error);
+    });
+  </script>
+</body>
+</html>

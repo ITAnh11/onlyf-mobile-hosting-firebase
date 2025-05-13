@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tham gia kết bạn</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <h1 id="name"></h1>
+  <img id="avatar" width="100" />
+  <p>Mời bạn kết nối với <span id="username"></span></p>
+  <button onclick="openApp()">Mở ứng dụng</button>
+
+  <script>
+    var LINK_DOWNLOAD_APP_ANDROID= '';
+    var SCHEME_URL = '';
+
+    fetch('/constants.json')
+    .then(response => response.json())
+    .then(constants => {
+      LINK_DOWNLOAD_APP_ANDROID = constants.LINK_DOWNLOAD_APP_ANDROID;
+      SCHEME_URL = constants.SCHEME_URL;
+    });
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const name = urlParams.get('name');
+    const username = urlParams.get('username');
+    const avatar = urlParams.get('avatar');
+    const userId = urlParams.get('userId');
+
+    document.getElementById('name').innerText = name;
+    document.getElementById('username').innerText = username;
+    document.getElementById('avatar').src = avatar;
+
+    function openApp() {
+      const now = Date.now();
+      if (window.SCHEME_URL) {
+        window.location = `${SCHEME_URL}invite/?userId=${userId}&name=${name}&username=${username}&avatar=${avatar}`;
+        setTimeout(() => {
+          window.location = '/download.html';
+        }, 2000);
+      } else {
+        console.error('SCHEME_URL is not defined');
+      }
+    }
+  </script>
+</body>
+</html>
