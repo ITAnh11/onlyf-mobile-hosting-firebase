@@ -23,17 +23,6 @@
         "source": "/payment/cancel",
         "destination": "/payment-cancel.html"
       }
-    ],
-    "headers": [
-      {
-        "source": "**/*.mjs",
-        "headers": [
-          {
-            "key": "Content-Type",
-            "value": "application/javascript"
-          }
-        ]
-      }
     ]
   }
 }
