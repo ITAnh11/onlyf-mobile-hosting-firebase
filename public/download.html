@@ -3,67 +3,113 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Tải Ứng Dụng</title>
+  <title>Tải Ứng Dụng OnlyF</title>
+  <link rel="icon" href="/icon_512.png">
   <style>
     body {
-      font-family: sans-serif;
+      font-family: "Segoe UI", sans-serif;
+      background-color: #f0f2f5;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
       text-align: center;
-      padding: 40px;
-      background: #f9f9f9;
-    }
-    img {
-      width: 120px;
-      margin-bottom: 20px;
-    }
-    h1 {
       color: #333;
     }
-    p {
-      color: #555;
-      font-size: 16px;
-      margin: 20px 0;
+
+    img {
+      width: 140px;
+      margin-bottom: 24px;
+      border-radius: 20px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
     }
+
+    h1 {
+      font-size: 28px;
+      margin-bottom: 16px;
+    }
+
+    p {
+      font-size: 18px;
+      margin: 14px 0;
+      color: #555;
+    }
+
     .button {
       display: inline-block;
-      padding: 14px 24px;
+      padding: 14px 26px;
+      margin: 12px 8px;
       background: #007aff;
-      color: white;
-      border-radius: 8px;
-      text-decoration: none;
+      color: #fff;
       font-size: 16px;
+      font-weight: 500;
+      border: none;
+      border-radius: 10px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
     }
+
     .button:hover {
       background: #005fcc;
+      transform: translateY(-1px);
+    }
+
+    .note {
+      margin-top: 40px;
+      font-size: 14px;
+      color: #888;
+      max-width: 300px;
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 24px;
+      }
+      p {
+        font-size: 16px;
+      }
+      .button {
+        width: 90%;
+        padding: 14px 0;
+        margin: 10px 0;
+      }
     }
   </style>
-
 </head>
 <body>
-  <img src="/icon_512.png" alt="App Icon" />
+
+  <img src="/icon_512.png" alt="OnlyF App Icon" />
   <h1>Chào mừng bạn đến với OnlyF</h1>
-  <p>Bạn cần cài đặt ứng dụng để tiếp tục sử dụng tính năng này.</p>
-  <a id="download-link-develop" class="button" href="">Tải Ứng Dụng Ngay (DEVELOP)</a>
-  <a id="download-link-preview" class="button" href="">Tải Ứng Dụng Ngay (PREVIEW)</a>
-  <p style="margin-top:40px; font-size: 14px; color:#999;">Hướng dẫn: tải về và cài đặt file APK, sau đó mở lại link share.</p>
+  <p>Vui lòng cài đặt ứng dụng để tiếp tục trải nghiệm tính năng hấp dẫn này.</p>
+
+  <a id="download-link-develop" class="button" href="#">Tải App (DEVELOP)</a>
+  <a id="download-link-preview" class="button" href="#">Tải App (PREVIEW)</a>
+
+  <p class="note">Hướng dẫn: Tải về file APK, cài đặt thủ công, rồi mở lại link được chia sẻ.</p>
 
   <script>
-    var LINK_DOWNLOAD_APP_ANDROID= '';
+    var LINK_DOWNLOAD_APP_ANDROID_DEVELOP = '';
+    var LINK_DOWNLOAD_APP_ANDROID_PREVIEW = '';
     var SCHEME_URL = '';
 
     fetch('/constants.json')
-    .then(response => response.json())
-    .then(constants => {
-      LINK_DOWNLOAD_APP_ANDROID_DEVELOP = constants.LINK_DOWNLOAD_APP_ANDROID_DEVELOP;
-      LINK_DOWNLOAD_APP_ANDROID_PREVIEW = constants.LINK_DOWNLOAD_APP_ANDROID_PREVIEW;
-      SCHEME_URL = constants.SCHEME_URL;
+      .then(response => response.json())
+      .then(constants => {
+        LINK_DOWNLOAD_APP_ANDROID_DEVELOP = constants.LINK_DOWNLOAD_APP_ANDROID_DEVELOP;
+        LINK_DOWNLOAD_APP_ANDROID_PREVIEW = constants.LINK_DOWNLOAD_APP_ANDROID_PREVIEW;
+        SCHEME_URL = constants.SCHEME_URL;
 
-      // Sử dụng các biến sau khi fetch hoàn tất
-      document.getElementById('download-link-develop').href = LINK_DOWNLOAD_APP_ANDROID_DEVELOP;
-      document.getElementById('download-link-preview').href = LINK_DOWNLOAD_APP_ANDROID_PREVIEW;
-    })
-    .catch(error => {
-      console.error('Error fetching constants:', error);
-    });
+        document.getElementById('download-link-develop').href = LINK_DOWNLOAD_APP_ANDROID_DEVELOP;
+        document.getElementById('download-link-preview').href = LINK_DOWNLOAD_APP_ANDROID_PREVIEW;
+      })
+      .catch(error => {
+        console.error('Error fetching constants:', error);
+      });
   </script>
+
 </body>
 </html>

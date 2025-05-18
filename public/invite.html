@@ -1,31 +1,102 @@
 <!DOCTYPE html>
-<html>
+<html lang="vi">
 <head>
-  <title>Tham gia kết bạn</title>
   <meta charset="UTF-8">
+  <title>Tham gia kết bạn</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="https://img.icons8.com/color/48/000000/add-user-group-man-man.png">
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background-color: #f0f2f5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 24px;
+      color: #333;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 26px;
+      margin-bottom: 12px;
+      color: #222;
+    }
+
+    p {
+      font-size: 18px;
+      margin: 16px 0;
+      color: #555;
+    }
+
+    #avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #1976d2;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 16px;
+      padding: 14px 26px;
+      font-size: 16px;
+      font-weight: 500;
+      background-color: #1976d2;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.2s;
+    }
+
+    .btn:hover {
+      background-color: #1565c0;
+      transform: translateY(-1px);
+    }
+
+    .footer {
+      margin-top: 48px;
+      font-size: 14px;
+      color: #888;
+    }
+  </style>
 </head>
 <body>
-  <h1 id="name"></h1>
-  <img id="avatar" width="100" />
-  <p>Mời bạn kết nối với <span id="username"></span></p>
-  <button onclick="openApp()">Mở ứng dụng</button>
+
+  <img id="avatar" src="" alt="Avatar"/>
+  <h1 id="name">Tên người dùng</h1>
+  <p>Mời bạn kết nối với <strong id="username">username</strong> trên OnlyF!</p>
+
+  <button class="btn" onclick="openApp()">📱 Mở ứng dụng</button>
+
+  <div class="footer">© 2025 OnlyF. All rights reserved.</div>
 
   <script>
-    var LINK_DOWNLOAD_APP_ANDROID= '';
+    var LINK_DOWNLOAD_APP_ANDROID = '';
     var SCHEME_URL = '';
 
     fetch('/constants.json')
-    .then(response => response.json())
-    .then(constants => {
-      LINK_DOWNLOAD_APP_ANDROID = constants.LINK_DOWNLOAD_APP_ANDROID;
-      SCHEME_URL = constants.SCHEME_URL;
-    });
+      .then(response => response.json())
+      .then(constants => {
+        LINK_DOWNLOAD_APP_ANDROID = constants.LINK_DOWNLOAD_APP_ANDROID;
+        SCHEME_URL = constants.SCHEME_URL;
+      })
+      .catch(error => {
+        console.error('Error fetching constants:', error);
+      });
 
     const urlParams = new URLSearchParams(window.location.search);
-    const name = urlParams.get('name');
-    const username = urlParams.get('username');
-    const avatar = urlParams.get('avatar');
+    const name = urlParams.get('name') || 'Người dùng';
+    const username = urlParams.get('username') || 'username';
+    const avatar = urlParams.get('avatar') || 'https://img.icons8.com/color/120/000000/user.png';
     const userId = urlParams.get('userId');
 
     document.getElementById('name').innerText = name;
@@ -33,16 +104,17 @@
     document.getElementById('avatar').src = avatar;
 
     function openApp() {
-      const now = Date.now();
-      if (window.SCHEME_URL) {
-        window.location = `${SCHEME_URL}invite/?userId=${userId}&name=${name}&username=${username}&avatar=${avatar}`;
+      if (SCHEME_URL) {
+        const deepLink = `${SCHEME_URL}invite/?userId=${encodeURIComponent(userId)}&name=${encodeURIComponent(name)}&username=${encodeURIComponent(username)}&avatar=${encodeURIComponent(avatar)}`;
+        window.location.href = deepLink;
         setTimeout(() => {
-          window.location = '/download.html';
+          window.location.href = '/download.html';
         }, 2000);
       } else {
         console.error('SCHEME_URL is not defined');
       }
     }
   </script>
+
 </body>
 </html>

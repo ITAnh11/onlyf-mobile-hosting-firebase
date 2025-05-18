@@ -3,38 +3,78 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Mở bài viết trong OnlyF</title>
+  <title>Mở bài viết trên OnlyF</title>
+  <link rel="icon" href="https://img.icons8.com/color/48/000000/share--v1.png" />
   <style>
     body {
-      font-family: sans-serif;
-      text-align: center;
-      padding: 40px;
-      background-color: #f9f9f9;
+      font-family: "Segoe UI", sans-serif;
+      background-color: #f0f2f5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 24px;
+      color: #333;
     }
+
     h1 {
+      font-size: 28px;
       margin-bottom: 16px;
+      color: #222;
     }
+
+    p {
+      font-size: 16px;
+      margin-bottom: 32px;
+      color: #555;
+    }
+
     .btn {
       display: inline-block;
       margin: 12px;
-      padding: 14px 24px;
+      padding: 14px 26px;
       font-size: 16px;
+      font-weight: 500;
       background-color: #1976d2;
-      color: white;
+      color: #fff;
       border: none;
-      border-radius: 8px;
+      border-radius: 10px;
       text-decoration: none;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.2s;
+    }
+
+    .btn:hover {
+      background-color: #1565c0;
+      transform: translateY(-1px);
+    }
+
+    .btn.secondary {
+      background-color: #555;
+    }
+
+    .btn.secondary:hover {
+      background-color: #333;
+    }
+
+    .footer {
+      margin-top: 48px;
+      font-size: 14px;
+      color: #888;
     }
   </style>
-
 </head>
 <body>
   <h1>Mở bài viết trên OnlyF</h1>
-  <p>Nếu bạn đã cài ứng dụng, hãy mở bài viết trực tiếp trong app.</p>
+  <p>Nếu bạn đã cài ứng dụng, hãy mở bài viết trực tiếp trong app để trải nghiệm tốt nhất.</p>
 
-  <a id="openAppBtn" class="btn">Mở trong ứng dụng</a>
+  <a id="openAppBtn" class="btn">📱 Mở trong ứng dụng</a>
   <br/>
-  <a href="/download.html" class="btn" style="background-color: #555;">Tải ứng dụng</a>
+  <a href="/download.html" class="btn secondary">⬇️ Tải ứng dụng</a>
+
+  <div class="footer">© 2025 OnlyF. All rights reserved.</div>
 
   <script>
   var LINK_DOWNLOAD_APP_ANDROID = '';
@@ -57,7 +97,6 @@
       // Khi bấm nút Mở ứng dụng
       document.getElementById("openAppBtn").onclick = () => {
         window.location.href = deepLink;
-        // Fallback sau 2s nếu không mở được app (chưa cài)
         setTimeout(() => {
           window.location.href = "/download.html";
         }, 2000);
