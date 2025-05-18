@@ -5,9 +5,9 @@ This guide will help you set up Firebase Hosting for your project.
 ## Clone git
 
 ```bash
-git clone
+git clone https://github.com/ITAnh11/onlyf-mobile-hosting-firebase.git
 
-cd
+cd onlyf-mobile-hosting-firebase
 ```
 
 ## Prerequisites
