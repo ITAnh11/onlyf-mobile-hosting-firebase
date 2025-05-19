@@ -90,9 +90,10 @@
       const urlParams = new URLSearchParams(window.location.search);
       const postId = urlParams.get("postId");
       const ownerId = urlParams.get("ownerId");
+      const createdAt = urlParams.get("createdAt");
 
       // Deep link URI
-      const deepLink = `${SCHEME_URL}share/post?postId=${postId}&ownerId=${ownerId}`;
+      const deepLink = `${SCHEME_URL}share/post?postId=${postId}&ownerId=${ownerId}&createdAt=${createdAt}`;
 
       // Khi bấm nút Mở ứng dụng
       document.getElementById("openAppBtn").onclick = () => {
