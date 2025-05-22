@@ -48,15 +48,12 @@
       SCHEME_URL = constants.SCHEME_URL;
 
       // Deep link URI
-      const deepLink = `${SCHEME_URL}payment/success`;
+      const deepLink = `${SCHEME_URL}payment-success`;
 
       // Khi bấm nút Quay lại ứng dụng
       document.getElementById("openAppBtn").onclick = () => {
         window.location.href = deepLink;
         // Fallback sau 2s nếu không mở được app (chưa cài)
-        setTimeout(() => {
-          window.location.href = "/download.html";
-        }, 2000);
       };
     })
     .catch(error => {
