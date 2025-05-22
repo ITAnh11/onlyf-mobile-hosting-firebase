@@ -93,7 +93,7 @@
       const createdAt = urlParams.get("createdAt");
 
       // Deep link URI
-      const deepLink = `${SCHEME_URL}share/post?postId=${postId}&ownerId=${ownerId}&createdAt=${createdAt}`;
+      const deepLink = `${SCHEME_URL}share-post?postId=${postId}&ownerId=${ownerId}&createdAt=${createdAt}`;
 
       // Khi bấm nút Mở ứng dụng
       document.getElementById("openAppBtn").onclick = () => {
